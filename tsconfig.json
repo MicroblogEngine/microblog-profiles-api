@@ -21,6 +21,7 @@
     "paths": {
       "@/*": ["./src/app/*"],
       "@/api/*": ["./src/app/api/*"],
+      "@/middlewares/*": ["./src/app/middlewares/*"],
       "@/models/*": ["./src/app/models/*"],
     }
   },
