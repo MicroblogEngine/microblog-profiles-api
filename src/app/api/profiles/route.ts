@@ -1,9 +1,8 @@
-import { fakeUsers } from "@/models/profiles";
 import { NextResponse } from "next/server";
 
 export async function GET() {
 
-    return new NextResponse(JSON.stringify(fakeUsers), {
-        status: 200,
-    });
+  return new NextResponse(JSON.stringify([]), {
+      status: 200,
+  });
 }
