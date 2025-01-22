@@ -14,10 +14,13 @@ datasource db {
 }
 
 model Profile {
-  id        Int      @id @default(autoincrement())
+  id        String   @id @default(uuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   published Boolean  @default(false)
   name      String   @db.VarChar(100)
-  photoId   Int?
+  photoId   String
+  userId    String   @unique
+
+  @@map("profiles")
 }
