@@ -19,7 +19,10 @@ model Profile {
   updatedAt DateTime @updatedAt
   published Boolean  @default(false)
   name      String   @db.VarChar(100)
-  photoId   String
+  birthDate DateTime
+  gender    String?  @db.VarChar(10)
+  bio       String?  @db.VarChar(1000)
+  photoId   String?  @db.VarChar(40)
   userId    String   @unique
 
   @@map("profiles")

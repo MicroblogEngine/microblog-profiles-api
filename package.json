@@ -13,7 +13,8 @@
   },
   "dependencies": {
     "@ararog/microblog-next": "^0.0.3",
-    "@ararog/microblog-types": "^0.0.5",
+    "@ararog/microblog-types": "^0.0.16",
+    "@ararog/microblog-validation": "^0.0.11",
     "@opentelemetry/api-logs": "^0.57.1",
     "@opentelemetry/instrumentation": "^0.57.1",
     "@opentelemetry/sdk-logs": "^0.57.1",

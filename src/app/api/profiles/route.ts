@@ -1,11 +1,24 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/helpers/prisma"
+import { SignupDetailsFormSchema } from "@ararog/microblog-validation";
 
 export const POST = async(req: NextRequest) => {
-  const data = await req.json();
+  const profilePayload = await req.json();
+
+  const {success, data, error} = await SignupDetailsFormSchema.safeParse(profilePayload);
+
+  if (!success) {
+    return new NextResponse(JSON.stringify({ errors: error?.formErrors.fieldErrors }), {
+      status: 400,
+    });
+  }
 
   await prisma.profile.create({
-    data: data,
+    data: {
+      name: data.name,
+      birthDate: data.birthDate,
+      userId: req.headers.get("user") as string,
+    }
   });
 
   return new NextResponse(null, {
