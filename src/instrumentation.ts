@@ -1,5 +1,5 @@
 import { registerOTel } from '@vercel/otel'
  
 export function register() {
-  registerOTel('microblog-feed-api')
+  registerOTel('microblog-profiles-api')
 }

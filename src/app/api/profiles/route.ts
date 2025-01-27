@@ -1,11 +1,22 @@
 import { NextRequest, NextResponse } from "next/server";
+import { headers } from "next/headers";
+
 import { prisma } from "@/helpers/prisma"
 import { SignupDetailsFormSchema } from "@ararog/microblog-validation";
 
 export const POST = async(req: NextRequest) => {
+  const authHeaders = await headers();
+  const userId = authHeaders.get("user");
+
+  if (!userId) {
+    return new NextResponse(JSON.stringify({ errors: { user: ["Invalid user ID"] } }), {
+      status: 400,
+    });  
+  }
+
   const profilePayload = await req.json();
 
-  const {success, data, error} = await SignupDetailsFormSchema.safeParse(profilePayload);
+  const {success, data, error} = SignupDetailsFormSchema.safeParse(profilePayload);
 
   if (!success) {
     return new NextResponse(JSON.stringify({ errors: error?.formErrors.fieldErrors }), {
@@ -17,7 +28,7 @@ export const POST = async(req: NextRequest) => {
     data: {
       name: data.name,
       birthDate: data.birthDate,
-      userId: req.headers.get("user") as string,
+      userId: userId,
     }
   });
 
