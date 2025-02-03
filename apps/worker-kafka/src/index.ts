@@ -1,16 +1,12 @@
 import 'dotenv/config';
 import { Kafka } from "kafkajs";
-import { Topics, logger } from "@ararog/microblog-server";
-
-const log = logger.child({
-  worker: "kafka"
-});
+import { Topics } from "@ararog/microblog-server";
 
 const CLIENT_ID = 'microblog';
 const GROUP_ID = 'microblog-profiles-api';
 
 const startKafka = async () => {
-  log.info('Starting Kafka consumer');
+  console.info('Starting Kafka consumer');
 
   const sasl = process.env.NODE_ENV === 'production' ? {
     mechanism: 'plain', // scram-sha-256 or scram-sha-512
@@ -31,11 +27,11 @@ const startKafka = async () => {
     Topics.SEND_RESET_PASSWORD_MAIL
   ], fromBeginning: true })
 
-  log.info('Kafka consumer connected to broker ', process.env.KAFKA_BROKER as string);
+  console.info('Kafka consumer connected to broker ', process.env.KAFKA_BROKER as string);
 
   await consumer.run({
     eachMessage: async ({ topic, partition, message }) => {
-      log.info('Received message from topic: ', topic, 'partition: ', partition, 'message: ', message.value?.toString());
+      console.info('Received message from topic: ', topic, 'partition: ', partition, 'message: ', message.value?.toString());
     },
   })
 }

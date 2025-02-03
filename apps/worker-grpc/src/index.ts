@@ -1,28 +1,29 @@
 import {createServer, CallContext} from 'nice-grpc';
 import { prisma } from "@ararog/microblog-profiles-api-db";
-import {DeepPartial, 
+import {
+  DeepPartial, 
   CreateProfileRequest, 
   CreateProfileResponse, 
   GetProfileByUserIdRequest,
   GetProfileByUserIdResponse,
-  ProfileServiceDefinition, 
-  ProfileServiceImplementation 
+  ProfilesServiceDefinition, 
+  ProfilesServiceImplementation 
 } from '@ararog/microblog-rpc';
 
-const profileServiceImpl: ProfileServiceImplementation = {
+const profilesServiceImpl: ProfilesServiceImplementation = {
   async createProfile(
     request: CreateProfileRequest,
     context: CallContext
   ): Promise<DeepPartial<CreateProfileResponse>> {
-    
-    if (!request.userId) {
+    const userId = context.metadata.get('x-user-id');
+    if (!userId) {
       throw new Error('User ID is required');
     }
     const profile = await prisma.profile.create({
       data: {
-        userId: request.userId,
+        userId: userId,
         name: request.name,
-        birthDate: new Date(request.dateOfBirth)
+        birthDate: new Date(request.birthDate)
       }
     });
     return {
@@ -42,10 +43,13 @@ const profileServiceImpl: ProfileServiceImplementation = {
         userId: userId
       }
     });
+
     // ... method logic
     return {
-      id: profile?.id,
-      name: profile?.name
+      profile: {
+        id: profile?.id,
+        name: profile?.name
+      }
     };
   },
 };
@@ -54,7 +58,7 @@ const startServer = async () => {
   console.log('Starting server');
   const server = createServer();
 
-  server.add(ProfileServiceDefinition, profileServiceImpl);
+  server.add(ProfilesServiceDefinition, profilesServiceImpl);
 
   console.log('Server listening on', process.env.GRPC_HOST || '0.0.0.0:8080');
   await server.listen(process.env.GRPC_HOST || '0.0.0.0:8080');

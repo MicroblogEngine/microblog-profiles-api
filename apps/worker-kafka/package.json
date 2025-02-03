@@ -9,7 +9,7 @@
     "build": "tsup src/index.ts --format cjs --dts"
   },
   "dependencies": {
-    "@ararog/microblog-server": "^0.0.7",
+    "@ararog/microblog-server": "^0.0.10",
     "@prisma/client": "6.1.0",
     "@repo/typescript-config": "workspace:*",
     "dotenv": "^16.4.7",
