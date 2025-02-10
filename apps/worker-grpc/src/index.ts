@@ -1,13 +1,14 @@
+import 'dotenv/config';
 import {createServer, CallContext} from 'nice-grpc';
 import { prisma } from "@ararog/microblog-profiles-api-db";
-import {
+import { 
   DeepPartial, 
+  ProfilesServiceDefinition,
+  ProfilesServiceImplementation, 
   CreateProfileRequest, 
-  CreateProfileResponse, 
+  CreateProfileResponse,
   GetProfileByUserIdRequest,
-  GetProfileByUserIdResponse,
-  ProfilesServiceDefinition, 
-  ProfilesServiceImplementation 
+  GetProfileByUserIdResponse
 } from '@ararog/microblog-rpc';
 
 const profilesServiceImpl: ProfilesServiceImplementation = {
@@ -34,7 +35,7 @@ const profilesServiceImpl: ProfilesServiceImplementation = {
     request: GetProfileByUserIdRequest,
     context: CallContext
   ): Promise<DeepPartial<GetProfileByUserIdResponse>> {
-    const userId = context.metadata.get('x-user-id');
+    const userId = request.id;
     if (!userId) {
       throw new Error('User ID is required');
     }
@@ -55,12 +56,12 @@ const profilesServiceImpl: ProfilesServiceImplementation = {
 };
 
 const startServer = async () => {
-  console.log('Starting server');
+  console.log('Starting gRPC server...');
   const server = createServer();
 
   server.add(ProfilesServiceDefinition, profilesServiceImpl);
 
-  console.log('Server listening on', process.env.GRPC_HOST || '0.0.0.0:8080');
+  console.log('gRPC server listening at ', process.env.GRPC_HOST || '0.0.0.0:8080');
   await server.listen(process.env.GRPC_HOST || '0.0.0.0:8080');
 }
 

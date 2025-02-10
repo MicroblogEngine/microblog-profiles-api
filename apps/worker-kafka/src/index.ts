@@ -6,7 +6,7 @@ const CLIENT_ID = 'microblog';
 const GROUP_ID = 'microblog-profiles-api';
 
 const startKafka = async () => {
-  console.info('Starting Kafka consumer');
+  console.info('Starting Kafka consumer...');
 
   const sasl = process.env.NODE_ENV === 'production' ? {
     mechanism: 'plain', // scram-sha-256 or scram-sha-512
