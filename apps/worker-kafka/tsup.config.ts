@@ -3,7 +3,7 @@ import { defineConfig } from 'tsup'
 export default defineConfig({
   entry: ['./src/index.ts'],
   //https://github.com/egoist/tsup/issues/619
-  noExternal: [ "kafkajs", "handlebars", "@sendgrid", "@ararog", "dotenv" ],
+  noExternal: [ "kafkajs", "@ararog", "dotenv" ],
   splitting: false,
   bundle: true,
   target: 'node23',

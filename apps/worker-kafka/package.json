@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@ararog/microblog-server": "^0.0.10",
-    "@prisma/client": "6.1.0",
+    "@ararog/microblog-profiles-api-db": "workspace:*",
     "@repo/typescript-config": "workspace:*",
     "dotenv": "^16.4.7",
     "kafkajs": "^2.2.4"
