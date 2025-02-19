@@ -2,7 +2,8 @@ import { defineConfig } from 'tsup'
 
 export default defineConfig({
   entry: ['./src/index.ts'],
-  noExternal: ['@ararog'], // Bundle any package starting with `@example` and their dependencies
+  //https://github.com/egoist/tsup/issues/619
+  noExternal: [ "kafkajs", "handlebars", "@sendgrid", "@ararog", "dotenv" ],
   splitting: false,
   bundle: true,
   outDir: './dist',
