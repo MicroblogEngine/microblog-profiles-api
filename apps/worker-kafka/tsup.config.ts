@@ -6,10 +6,12 @@ export default defineConfig({
   noExternal: [ "kafkajs", "handlebars", "@sendgrid", "@ararog", "dotenv" ],
   splitting: false,
   bundle: true,
+  target: 'node23',
   outDir: './dist',
   clean: true,
   env: { IS_SERVER_BUILD: 'true' },
   loader: { '.json': 'copy' },
   minify: true,
+  format: ['cjs'],  
   sourcemap: true,
 })
