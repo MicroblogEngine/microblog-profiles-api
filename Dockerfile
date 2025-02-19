@@ -31,6 +31,7 @@ RUN pnpm turbo build
 FROM builder AS test
 ARG SOURCE_DIR
 WORKDIR "$SOURCE_DIR"
+#RUN pnpm run test
 RUN pnpm run lint
 
 
@@ -53,9 +54,9 @@ EXPOSE 3000
 ENV PORT=3000
 ENV HOSTNAME="0.0.0.0"
 
-# Automatically leverage output traces to reduce image size
-# https://nextjs.org/docs/advanced-features/output-file-tracing
-ENV PRISMA_QUERY_ENGINE_BINARY "${SOURCE_DIR}/generated/client/libquery_engine-debian-openssl-3.0.x.so.node"
+ENV PRISMA_QUERY_ENGINE_BINARY "${SOURCE_DIR}/libquery_engine-debian-openssl-3.0.x.so.node"
+
+COPY --from=builder --chown=nextjs:nodejs ["${SOURCE_DIR}/packages/database/generated/client/libquery_engine-debian-openssl-3.0.x.so.node", "."]
 
 COPY --from=builder --chown=nextjs:nodejs ["${SOURCE_DIR}/apps/api/public", "./api/public"]
 COPY --from=builder --chown=nextjs:nodejs ["${SOURCE_DIR}/apps/api/.next/standalone", "./api"]
