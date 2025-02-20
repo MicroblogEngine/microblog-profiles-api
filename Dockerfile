@@ -34,6 +34,7 @@ WORKDIR "$SOURCE_DIR"
 #RUN pnpm run lint
 RUN echo "nothing to do"
 
+
 FROM base AS runtime
 
 ARG SOURCE_DIR
@@ -57,9 +58,10 @@ ENV PRISMA_QUERY_ENGINE_LIBRARY "${SOURCE_DIR}/libquery_engine-debian-openssl-3.
 
 COPY --from=builder --chown=nextjs:nodejs ["${SOURCE_DIR}/packages/database/generated/client/libquery_engine-debian-openssl-3.0.x.so.node", "."]
 
-COPY --from=builder --chown=nextjs:nodejs ["${SOURCE_DIR}/apps/api/public", "./api/public"]
-COPY --from=builder --chown=nextjs:nodejs ["${SOURCE_DIR}/apps/api/.next/standalone", "./api"]
-COPY --from=builder --chown=nextjs:nodejs ["${SOURCE_DIR}/apps/api/.next/static", "./api/.next/static"]
+COPY --from=builder --chown=nextjs:nodejs ["${SOURCE_DIR}/node_modules", "./node_modules"]
+COPY --from=builder --chown=nextjs:nodejs ["${SOURCE_DIR}/apps/api/public", "./apps/api/public"]
+COPY --from=builder --chown=nextjs:nodejs ["${SOURCE_DIR}/apps/api/.next/standalone", "./apps/api/.next/standalone"]
+COPY --from=builder --chown=nextjs:nodejs ["${SOURCE_DIR}/apps/api/.next/static", "./apps/api/.next/static"]
 
 COPY --from=builder --chown=nextjs:nodejs ["${SOURCE_DIR}/apps/worker-kafka/dist", "./worker-kafka"]
 COPY --from=builder --chown=nextjs:nodejs ["${SOURCE_DIR}/apps/worker-grpc/dist", "./worker-grpc"]
