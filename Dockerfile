@@ -64,5 +64,6 @@ COPY --from=builder --chown=nextjs:nodejs ["${SOURCE_DIR}/apps/api/.next/static"
 COPY --from=builder --chown=nextjs:nodejs ["${SOURCE_DIR}/apps/worker-kafka/dist", "./worker-kafka"]
 COPY --from=builder --chown=nextjs:nodejs ["${SOURCE_DIR}/apps/worker-grpc/dist", "./worker-grpc"]
 
-CMD ["node ${ENTRYPOINT}"]
+#CMD ["node ${ENTRYPOINT}"]
+ENTRYPOINT ["tail", "-f", "/dev/null"]
 
