@@ -17,14 +17,14 @@ RUN yarn global add turbo
 # Use the approach here to build faster
 # https://turbo.build/repo/docs/guides/tools/docker
 
-COPY . .
+COPY pnpm-lock.yaml .
 # We need install dev dependencies for turbo build without NODE_ENV=production
-RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm fetch && \
-  pnpm install
+RUN pnpm fetch --prod
 
+COPY . .
 # Set the environment to production only for build
 ENV NODE_ENV=production
-RUN pnpm turbo build
+RUN pnpm run build
 
 
 FROM builder AS test
