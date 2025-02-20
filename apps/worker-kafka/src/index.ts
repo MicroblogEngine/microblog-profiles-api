@@ -18,7 +18,7 @@ const startKafka = async () => {
   const kafka = new Kafka({
     clientId: CLIENT_ID,
     brokers: [process.env.KAFKA_BROKER || 'localhost:9092'],
-    ...sasl,
+    sasl: sasl,
   });
 
   const consumer = kafka.consumer({ groupId: GROUP_ID, allowAutoTopicCreation: true })
