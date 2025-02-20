@@ -1,18 +1,13 @@
 import { NextResponse } from "next/server";
 import { headers } from "next/headers";
 import { prisma } from "@ararog/microblog-profiles-api-db";
-import { logger } from "@ararog/microblog-server";
-
-const log = logger.child({
-  route: "profiles",
-});
 
 export const GET = async () => {
   const authHeaders = await headers();
   const userId = authHeaders.get("user");
 
   if (!userId) {
-    log.error("Invalid user ID");
+    console.error("Invalid user ID");
     return new NextResponse(JSON.stringify({ errors: { user: ["Invalid user ID"] } }), {
       status: 400,
     });  
@@ -25,7 +20,7 @@ export const GET = async () => {
   });
 
   if (!profile) {
-    log.error("Profile not found");
+    console.error("Profile not found");
     return new NextResponse(JSON.stringify({ errors: { profile: ["Profile not found"] } }), {
       status: 404,
     });  
