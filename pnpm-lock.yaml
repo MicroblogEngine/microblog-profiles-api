@@ -18,85 +18,14 @@ importers:
         specifier: 5.7.3
         version: 5.7.3
 
-  apps/worker-grpc:
-    dependencies:
-      '@ararog/microblog-profiles-api-db':
-        specifier: workspace:*
-        version: link:../../packages/database
-      '@ararog/microblog-rpc':
-        specifier: ^0.0.19
-        version: 0.0.19
-      '@ararog/microblog-server':
-        specifier: ^0.0.10
-        version: 0.0.10
-      '@bufbuild/protobuf':
-        specifier: ^2.2.3
-        version: 2.2.3
-      '@repo/typescript-config':
-        specifier: workspace:*
-        version: link:../../packages/typescript-config
-      dotenv:
-        specifier: ^16.4.7
-        version: 16.4.7
-      nice-grpc:
-        specifier: ^2.1.10
-        version: 2.1.10
-      nice-grpc-common:
-        specifier: ^2.0.2
-        version: 2.0.2
-    devDependencies:
-      '@types/node':
-        specifier: ^20.17.16
-        version: 20.17.16
-      nodemon:
-        specifier: ^3.1.9
-        version: 3.1.9
-      ts-node:
-        specifier: ^10.9.2
-        version: 10.9.2(@types/node@20.17.16)(typescript@5.7.3)
-      tsup:
-        specifier: ^8.3.6
-        version: 8.3.6(postcss@8.5.1)(typescript@5.7.3)
-
-  apps/worker-kafka:
-    dependencies:
-      '@ararog/microblog-profiles-api-db':
-        specifier: workspace:*
-        version: link:../../packages/database
-      '@ararog/microblog-server':
-        specifier: ^0.0.10
-        version: 0.0.10
-      '@repo/typescript-config':
-        specifier: workspace:*
-        version: link:../../packages/typescript-config
-      dotenv:
-        specifier: ^16.4.7
-        version: 16.4.7
-      kafkajs:
-        specifier: ^2.2.4
-        version: 2.2.4
-    devDependencies:
-      '@types/node':
-        specifier: ^20.17.16
-        version: 20.17.16
-      nodemon:
-        specifier: ^3.1.9
-        version: 3.1.9
-      ts-node:
-        specifier: ^10.9.2
-        version: 10.9.2(@types/node@20.17.16)(typescript@5.7.3)
-      tsup:
-        specifier: ^8.3.6
-        version: 8.3.6(postcss@8.5.1)(typescript@5.7.3)
-
-  packages/api:
+  apps/api:
     dependencies:
       '@ararog/microblog-next':
         specifier: ^0.0.6
         version: 0.0.6(jose@5.9.6)(next@15.1.0(@opentelemetry/api@1.9.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))
       '@ararog/microblog-profiles-api-db':
         specifier: workspace:*
-        version: link:../database
+        version: link:../../packages/database
       '@ararog/microblog-rpc':
         specifier: ^0.0.18
         version: 0.0.18
@@ -182,6 +111,77 @@ importers:
       vitest-tsconfig-paths:
         specifier: ^3.4.1
         version: 3.4.1
+
+  apps/worker-grpc:
+    dependencies:
+      '@ararog/microblog-profiles-api-db':
+        specifier: workspace:*
+        version: link:../../packages/database
+      '@ararog/microblog-rpc':
+        specifier: ^0.0.19
+        version: 0.0.19
+      '@ararog/microblog-server':
+        specifier: ^0.0.10
+        version: 0.0.10
+      '@bufbuild/protobuf':
+        specifier: ^2.2.3
+        version: 2.2.3
+      '@repo/typescript-config':
+        specifier: workspace:*
+        version: link:../../packages/typescript-config
+      dotenv:
+        specifier: ^16.4.7
+        version: 16.4.7
+      nice-grpc:
+        specifier: ^2.1.10
+        version: 2.1.10
+      nice-grpc-common:
+        specifier: ^2.0.2
+        version: 2.0.2
+    devDependencies:
+      '@types/node':
+        specifier: ^20.17.16
+        version: 20.17.16
+      nodemon:
+        specifier: ^3.1.9
+        version: 3.1.9
+      ts-node:
+        specifier: ^10.9.2
+        version: 10.9.2(@types/node@20.17.16)(typescript@5.7.3)
+      tsup:
+        specifier: ^8.3.6
+        version: 8.3.6(postcss@8.5.1)(typescript@5.7.3)
+
+  apps/worker-kafka:
+    dependencies:
+      '@ararog/microblog-profiles-api-db':
+        specifier: workspace:*
+        version: link:../../packages/database
+      '@ararog/microblog-server':
+        specifier: ^0.0.10
+        version: 0.0.10
+      '@repo/typescript-config':
+        specifier: workspace:*
+        version: link:../../packages/typescript-config
+      dotenv:
+        specifier: ^16.4.7
+        version: 16.4.7
+      kafkajs:
+        specifier: ^2.2.4
+        version: 2.2.4
+    devDependencies:
+      '@types/node':
+        specifier: ^20.17.16
+        version: 20.17.16
+      nodemon:
+        specifier: ^3.1.9
+        version: 3.1.9
+      ts-node:
+        specifier: ^10.9.2
+        version: 10.9.2(@types/node@20.17.16)(typescript@5.7.3)
+      tsup:
+        specifier: ^8.3.6
+        version: 8.3.6(postcss@8.5.1)(typescript@5.7.3)
 
   packages/database:
     dependencies:
