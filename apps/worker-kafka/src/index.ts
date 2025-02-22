@@ -24,8 +24,7 @@ const startKafka = async () => {
   const consumer = kafka.consumer({ groupId: GROUP_ID, allowAutoTopicCreation: true })
   await consumer.connect()
   await consumer.subscribe({ topics: [
-    Topics.SEND_VERIFICATION_MAIL, 
-    Topics.SEND_RESET_PASSWORD_MAIL
+    Topics.DELETE_PROFILE
   ], fromBeginning: true })
 
   console.info('Kafka consumer connected to broker ', process.env.KAFKA_BROKER as string);
